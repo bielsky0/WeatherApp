@@ -13,8 +13,8 @@ export const loadForecast = async function (city) {
 
     state.forecast = data.list;
 
-    console.log(state.forecast);
-    console.log(state.forecast[0].dt);
+    // console.log(state.forecast);
+    // console.log(state.forecast[0].dt);
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;

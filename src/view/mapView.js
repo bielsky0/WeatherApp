@@ -7,7 +7,6 @@ class MapView extends view {
   constructor() {
     super();
     this._loadMap();
-    console.log("siema mapa z tej stroy");
   }
 
   _generateMatkup() {}

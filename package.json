@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/bielsky0/WeatherApp#readme",
   "devDependencies": {
-    "parcel": "^2.0.0-beta.2",
     "regenerator-runtime": "^0.13.7"
+  },
+  "dependencies": {
+    "parcel": "^2.0.0-beta.2"
   }
 }

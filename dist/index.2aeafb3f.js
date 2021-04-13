@@ -470,47 +470,7 @@ const init = function () {
 };
 init();
 
-},{"./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","regenerator-runtime":"62Qib"}],"53sO2":[function(require,module,exports) {
-var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-_parcelHelpers.defineInteropFlag(exports);
-_parcelHelpers.export(exports, "state", function () {
-  return state;
-});
-_parcelHelpers.export(exports, "loadForecast", function () {
-  return loadForecast;
-});
-_parcelHelpers.export(exports, "loadWeather", function () {
-  return loadWeather;
-});
-require("regenerator-runtime");
-var _configJs = require("./config.js");
-var _helpersJs = require("./helpers.js");
-const state = {
-  forecast: {},
-  weather: {}
-};
-const loadForecast = async function (city) {
-  try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${city}&appid=${_configJs.API_KEY}`);
-    state.forecast = data.list;
-    console.log(state.forecast);
-    console.log(state.forecast[0].dt);
-  } catch (err) {
-    console.error(`${err} !!!`);
-    throw err;
-  }
-};
-const loadWeather = async function (city) {
-  try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}q=${city}&appid=${_configJs.API_KEY}`);
-    state.weather = data;
-  } catch (err) {
-    console.error(`${err} !!!`);
-    throw err;
-  }
-};
-
-},{"regenerator-runtime":"62Qib","./config.js":"5yJJr","./helpers.js":"1K0Ha","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"62Qib":[function(require,module,exports) {
+},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"62Qib":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1260,7 +1220,45 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"5yJJr":[function(require,module,exports) {
+},{}],"53sO2":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "state", function () {
+  return state;
+});
+_parcelHelpers.export(exports, "loadForecast", function () {
+  return loadForecast;
+});
+_parcelHelpers.export(exports, "loadWeather", function () {
+  return loadWeather;
+});
+require("regenerator-runtime");
+var _configJs = require("./config.js");
+var _helpersJs = require("./helpers.js");
+const state = {
+  forecast: {},
+  weather: {}
+};
+const loadForecast = async function (city) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${city}&appid=${_configJs.API_KEY}`);
+    state.forecast = data.list;
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
+};
+const loadWeather = async function (city) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}q=${city}&appid=${_configJs.API_KEY}`);
+    state.weather = data;
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
+};
+
+},{"regenerator-runtime":"62Qib","./config.js":"5yJJr","./helpers.js":"1K0Ha","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5yJJr":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "API_KEY", function () {
@@ -1371,7 +1369,6 @@ class MapView extends _viewJsDefault.default {
     _defineProperty(this, "_parentElement", document.querySelector(".search"));
     _defineProperty(this, "_map", L.map("map").setView([51.505, -0.09], 13));
     this._loadMap();
-    console.log("siema mapa z tej stroy");
   }
   _generateMatkup() {}
   _loadMap() {
@@ -1441,10 +1438,11 @@ class SearchView extends _viewJsDefault.default {
     this._form.addEventListener("submit", function (e) {
       e.preventDefault();
       // Select input element form xdd array
-      const xdd = e.target.childNodes;
-      console.log(xdd);
-      console.log(xdd);
-      console.log(xdd);
+      const xdd = Array.from(e.target.childNodes).find(e => {
+        if (e.classList) {
+          return e.classList.contains("input");
+        }
+      });
       console.log(xdd);
       handler("Bielawa");
     });
