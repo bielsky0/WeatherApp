@@ -1,0 +1,16 @@
+var _modelJs = require("./model.js");
+require("./view/mapView.js");
+var _viewSearchViewJs = require("./view/searchView.js");
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _viewSearchViewJsDefault = _parcelHelpers.interopDefault(_viewSearchViewJs);
+const controlForecast = async function () {
+  try {
+    await _modelJs.loadForecast("Bielawa");
+  } catch (err) {
+    console.error(err);
+  }
+};
+const init = function () {
+  _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlForecast);
+};
+init();

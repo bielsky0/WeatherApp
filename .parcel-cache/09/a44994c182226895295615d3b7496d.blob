@@ -1,0 +1,18 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "API_KEY", function () {
+  return API_KEY;
+});
+_parcelHelpers.export(exports, "API_WEATHER", function () {
+  return API_WEATHER;
+});
+_parcelHelpers.export(exports, "API_FORCAST", function () {
+  return API_FORCAST;
+});
+_parcelHelpers.export(exports, "TIMEOUT_SEC", function () {
+  return TIMEOUT_SEC;
+});
+const API_KEY = "f5f020080e0a829ea7030c7f024953d2";
+const API_WEATHER = "api.openweathermap.org/data/2.5/weather?";
+const API_FORCAST = "api.openweathermap.org/data/2.5/forecast?";
+const TIMEOUT_SEC = 10;

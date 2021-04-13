@@ -1,0 +1,7 @@
+var _modelJs = require("./model.js");
+require("./view/mapView.js");
+const controlForecast = async function () {
+  await _modelJs.loadForecast("Bielawa");
+};
+const init = function () {};
+init();
