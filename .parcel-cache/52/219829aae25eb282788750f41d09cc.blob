@@ -1,0 +1,42 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "state", function () {
+  return state;
+});
+_parcelHelpers.export(exports, "loadForecast", function () {
+  return loadForecast;
+});
+_parcelHelpers.export(exports, "loadWeather", function () {
+  return loadWeather;
+});
+require("regenerator-runtime");
+var _configJs = require("./config.js");
+var _helpersJs = require("./helpers.js");
+const state = {
+  forecast: {},
+  weather: {}
+};
+const createWeatherObject = function (data) {
+  const {weather} = data;
+  return {
+    weather
+  };
+};
+const loadForecast = async function (city) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${city}&appid=${_configJs.API_KEY}`);
+    state.forecast = data.list;
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
+};
+const loadWeather = async function (city) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}q=${city}&appid=${_configJs.API_KEY}`);
+    state.weather = createWeatherObject(data);
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
+};

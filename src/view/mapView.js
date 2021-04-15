@@ -9,8 +9,6 @@ class MapView extends view {
     this._loadMap();
   }
 
-  _generateMatkup() {}
-
   _loadMap() {
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:

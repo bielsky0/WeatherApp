@@ -1,0 +1,23 @@
+require("regenerator-runtime");
+var _modelJs = require("./model.js");
+require("./view/mapView.js");
+var _viewSearchViewJs = require("./view/searchView.js");
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _viewSearchViewJsDefault = _parcelHelpers.interopDefault(_viewSearchViewJs);
+if (module.hot) {
+  module.hot.accept();
+}
+const controlWeather = async function (city) {
+  try {
+    await _modelJs.loadWeather(city);
+    await _modelJs.loadForecast(city);
+    console.log(_modelJs.state.forecast);
+    console.log(_modelJs.state.weather);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const init = function () {
+  _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlWeather);
+};
+init();

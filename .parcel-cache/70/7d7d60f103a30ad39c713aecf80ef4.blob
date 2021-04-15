@@ -1,0 +1,31 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./view.js");
+var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class MapView extends _viewJsDefault.default {
+  constructor() {
+    super();
+    _defineProperty(this, "_parentElement", document.querySelector(".search"));
+    _defineProperty(this, "_map", L.map("map").setView([51.505, -0.09], 13));
+  }
+  _generateMatkup() {}
+  _loadMap() {
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this._map);
+  }
+}
+exports.default = new MapView();

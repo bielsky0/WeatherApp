@@ -11,14 +11,13 @@ class SearchView extends view {
       e.preventDefault();
 
       // Select input element form xdd array
-      const xdd = Array.from(e.target.childNodes).find((e) => {
+      const inputEl = Array.from(e.target.childNodes).find((e) => {
         if (e.classList) {
           return e.classList.contains("input");
         }
       });
-      console.log(xdd);
 
-      handler("Bielawa");
+      handler(inputEl.value);
     });
   }
 }

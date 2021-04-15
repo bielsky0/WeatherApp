@@ -448,29 +448,26 @@ require("./view/mapView.js");
 var _viewSearchViewJs = require("./view/searchView.js");
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 var _viewSearchViewJsDefault = _parcelHelpers.interopDefault(_viewSearchViewJs);
+var _viewCurrentViewJs = require("./view/currentView.js");
+var _viewCurrentViewJsDefault = _parcelHelpers.interopDefault(_viewCurrentViewJs);
 if (module.hot) {
   module.hot.accept();
 }
-const controlForecast = async function (city) {
-  try {
-    await _modelJs.loadForecast(city);
-  } catch (err) {
-    console.error(err);
-  }
-};
 const controlWeather = async function (city) {
   try {
-    await _modelJs.loadFoWeather(city);
+    await _modelJs.loadWeather(city);
+    await _modelJs.loadForecast(city);
+    _viewCurrentViewJsDefault.default.render(_modelJs.state.weather);
   } catch (err) {
     console.error(err);
   }
 };
 const init = function () {
-  _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlForecast);
+  _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlWeather);
 };
 init();
 
-},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"62Qib":[function(require,module,exports) {
+},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./view/currentView.js":"3BGsU"}],"62Qib":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1239,6 +1236,15 @@ const state = {
   forecast: {},
   weather: {}
 };
+const createWeatherObject = function (data) {
+  const weather = data;
+  return {
+    name: weather.name,
+    main: weather.main,
+    dt: weather.dt,
+    weather: weather.weather[0]
+  };
+};
 const loadForecast = async function (city) {
   try {
     const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${city}&appid=${_configJs.API_KEY}`);
@@ -1251,7 +1257,7 @@ const loadForecast = async function (city) {
 const loadWeather = async function (city) {
   try {
     const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}q=${city}&appid=${_configJs.API_KEY}`);
-    state.weather = data;
+    state.weather = createWeatherObject(data);
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
@@ -1270,12 +1276,16 @@ _parcelHelpers.export(exports, "API_WEATHER", function () {
 _parcelHelpers.export(exports, "API_FORECAST", function () {
   return API_FORECAST;
 });
+_parcelHelpers.export(exports, "ICONS_URL", function () {
+  return ICONS_URL;
+});
 _parcelHelpers.export(exports, "TIMEOUT_SEC", function () {
   return TIMEOUT_SEC;
 });
 const API_KEY = "f5f020080e0a829ea7030c7f024953d2";
 const API_WEATHER = "http://api.openweathermap.org/data/2.5/weather?";
 const API_FORECAST = "http://api.openweathermap.org/data/2.5/forecast?";
+const ICONS_URL = "http://openweathermap.org/img/wn/";
 const TIMEOUT_SEC = 10;
 
 },{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5gA8y":[function(require,module,exports) {
@@ -1370,7 +1380,6 @@ class MapView extends _viewJsDefault.default {
     _defineProperty(this, "_map", L.map("map").setView([51.505, -0.09], 13));
     this._loadMap();
   }
-  _generateMatkup() {}
   _loadMap() {
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -1402,8 +1411,11 @@ class View {
   render(data) {
     this._data = data;
     const markup = this._generateMarkup();
-    this._parentElement.insert;
+    this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+  _clear() {
+    this._parentElement.innerHTML = "";
   }
 }
 exports.default = View;
@@ -1438,18 +1450,50 @@ class SearchView extends _viewJsDefault.default {
     this._form.addEventListener("submit", function (e) {
       e.preventDefault();
       // Select input element form xdd array
-      const xdd = Array.from(e.target.childNodes).find(e => {
+      const inputEl = Array.from(e.target.childNodes).find(e => {
         if (e.classList) {
           return e.classList.contains("input");
         }
       });
-      console.log(xdd);
-      handler("Bielawa");
+      handler(inputEl.value);
     });
   }
 }
 exports.default = new SearchView();
 
-},{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
+},{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"3BGsU":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = _parcelHelpers.interopDefault(_view);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class CurrentView extends _viewDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentElement", document.querySelector(".results--current"));
+  }
+  _generateMarkup() {
+    return `
+    <h2>${this._data.name}</h2>
+    <span>${this._data.weather.main}</span>
+    <h2>${this._data.main.temp}K</h2>
+    `;
+  }
+}
+exports.default = new CurrentView();
+
+},{"./view":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
 
 //# sourceMappingURL=index.2aeafb3f.js.map
