@@ -450,6 +450,8 @@ var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 var _viewSearchViewJsDefault = _parcelHelpers.interopDefault(_viewSearchViewJs);
 var _viewCurrentViewJs = require("./view/currentView.js");
 var _viewCurrentViewJsDefault = _parcelHelpers.interopDefault(_viewCurrentViewJs);
+var _viewHourlyViewJs = require("./view/hourlyView.js");
+var _viewHourlyViewJsDefault = _parcelHelpers.interopDefault(_viewHourlyViewJs);
 if (module.hot) {
   module.hot.accept();
 }
@@ -458,6 +460,8 @@ const controlWeather = async function (city) {
     await _modelJs.loadWeather(city);
     await _modelJs.loadForecast(city);
     _viewCurrentViewJsDefault.default.render(_modelJs.state.weather);
+    _viewHourlyViewJsDefault.default.render(_modelJs.state.hourly);
+    console.log(_modelJs.state.hourly);
   } catch (err) {
     console.error(err);
   }
@@ -467,7 +471,7 @@ const init = function () {
 };
 init();
 
-},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./view/currentView.js":"3BGsU"}],"62Qib":[function(require,module,exports) {
+},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","./view/currentView.js":"3BGsU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./view/hourlyView.js":"3mJKf"}],"62Qib":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1234,7 +1238,8 @@ var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
 const state = {
   forecast: {},
-  weather: {}
+  weather: {},
+  hourly: {}
 };
 const createWeatherObject = function (data) {
   const weather = data;
@@ -1249,6 +1254,7 @@ const loadForecast = async function (city) {
   try {
     const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${city}&appid=${_configJs.API_KEY}`);
     state.forecast = data.list;
+    state.hourly = data.list.slice(0, 8);
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
@@ -1494,6 +1500,45 @@ class CurrentView extends _viewDefault.default {
 }
 exports.default = new CurrentView();
 
-},{"./view":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
+},{"./view":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"3mJKf":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./view.js");
+var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class HourlyView extends _viewJsDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentElement", document.querySelector(".results--hour--list"));
+  }
+  _generateMarkup() {
+    return this._data.map(result => {
+      return `
+    <li class="result--hour-item">
+      <div class="result--hour">
+        <h2>${result.dt_txt.slice(-8)}</h2>
+        <span>${result.weather[0].main}</span>
+        <h2>${result.main.temp}K</h2>
+      </div>
+    </li>
+          `;
+    });
+  }
+}
+exports.default = new HourlyView();
+
+},{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
 
 //# sourceMappingURL=index.2aeafb3f.js.map

@@ -94,6 +94,7 @@ a {
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-size: 10px;
 }
 .results--week,
 .results--hour {

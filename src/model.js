@@ -5,6 +5,7 @@ import { getJSON } from "./helpers.js";
 export const state = {
   forecast: {},
   weather: {},
+  hourly: {},
 };
 
 const createWeatherObject = function (data) {
@@ -22,6 +23,7 @@ export const loadForecast = async function (city) {
     const data = await getJSON(`${API_FORECAST}q=${city}&appid=${API_KEY}`);
 
     state.forecast = data.list;
+    state.hourly = data.list.slice(0, 8);
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
