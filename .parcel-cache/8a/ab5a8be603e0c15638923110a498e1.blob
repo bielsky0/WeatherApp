@@ -55,7 +55,7 @@ a {
 
 .container--main {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 100px;
   justify-content: center;
   align-content: center;
@@ -74,8 +74,8 @@ a {
   text-align: center;
 }
 .map {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 }
 .results {
   display: grid;
@@ -103,5 +103,3 @@ a {
   align-items: center;
   text-align: center;
 }
-
-/*# sourceMappingURL=index.d10797b7.css.map */

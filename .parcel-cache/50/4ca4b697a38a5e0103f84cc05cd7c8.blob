@@ -55,7 +55,7 @@ a {
 
 .container--main {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 100px;
   justify-content: center;
   align-content: center;
@@ -103,5 +103,3 @@ a {
   align-items: center;
   text-align: center;
 }
-
-/*# sourceMappingURL=index.d10797b7.css.map */
