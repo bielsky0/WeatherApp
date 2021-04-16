@@ -1,0 +1,30 @@
+require("regenerator-runtime");
+var _modelJs = require("./model.js");
+require("./view/mapView.js");
+var _viewSearchViewJs = require("./view/searchView.js");
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _viewSearchViewJsDefault = _parcelHelpers.interopDefault(_viewSearchViewJs);
+var _viewCurrentViewJs = require("./view/currentView.js");
+var _viewCurrentViewJsDefault = _parcelHelpers.interopDefault(_viewCurrentViewJs);
+var _viewHourlyViewJs = require("./view/hourlyView.js");
+var _viewHourlyViewJsDefault = _parcelHelpers.interopDefault(_viewHourlyViewJs);
+if (module.hot) {
+  module.hot.accept();
+}
+const controlWeather = async function (city) {
+  try {
+    _viewCurrentViewJsDefault.default.renderSpinner();
+    _viewHourlyViewJsDefault.default.renderSpinner();
+    await _modelJs.loadForecast(city);
+    _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast);
+    _viewHourlyViewJsDefault.default.render(_modelJs.state.hourly);
+  } catch (err) {
+    _viewCurrentViewJsDefault.default.renderError(err.message);
+    _viewHourlyViewJsDefault.default.renderError(err.message);
+    console.error(err);
+  }
+};
+const init = function () {
+  _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlWeather);
+};
+init();

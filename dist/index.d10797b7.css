@@ -74,8 +74,8 @@ a {
   text-align: center;
 }
 .map {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 }
 .results {
   display: grid;
@@ -102,6 +102,24 @@ a {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.spinner {
+  margin: 10px auto;
+  text-align: center;
+}
+.spinner h2 {
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=index.d10797b7.css.map */

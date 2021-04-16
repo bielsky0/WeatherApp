@@ -11,14 +11,18 @@ if (module.hot) {
 
 const controlWeather = async function (city) {
   try {
-    await model.loadWeather(city);
+    currentView.renderSpinner();
+    hourlyView.renderSpinner();
+
     await model.loadForecast(city);
 
-    currentView.render(model.state.weather);
+    currentView.render(model.state.forecast);
     hourlyView.render(model.state.hourly);
 
-    console.log(model.state.hourly);
+    // console.log(model.state.forecast);
   } catch (err) {
+    currentView.renderError(err.message);
+    hourlyView.renderError(err.message);
     console.error(err);
   }
 };

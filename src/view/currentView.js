@@ -5,9 +5,9 @@ class CurrentView extends view {
 
   _generateMarkup() {
     return `
-    <h2>${this._data.name}</h2>
-    <span>${this._data.weather.main}</span>
-    <h2>${this._data.main.temp}K</h2>
+    <h2>${this._data.city.name}</h2>
+    <span>${this._data.current.weather.main}</span>
+    <h2>${this._data.current.main.temp}K</h2>
     `;
   }
 }

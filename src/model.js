@@ -1,28 +1,29 @@
 import { async } from "regenerator-runtime";
-import { API_KEY, API_WEATHER, API_FORECAST } from "./config.js";
+import { API_KEY, API_FORECAST } from "./config.js";
 import { getJSON } from "./helpers.js";
 
 export const state = {
-  forecast: {},
-  weather: {},
+  forecast: {
+    city: {},
+    days: [],
+    current: {},
+  },
   hourly: {},
 };
 
-const createWeatherObject = function (data) {
-  const weather = data;
-  return {
-    name: weather.name,
-    main: weather.main,
-    dt: weather.dt,
-    weather: weather.weather[0],
-  };
-};
-
-export const loadForecast = async function (city) {
+export const loadForecast = async function (place) {
   try {
-    const data = await getJSON(`${API_FORECAST}q=${city}&appid=${API_KEY}`);
+    const data = await getJSON(`${API_FORECAST}q=${place}&appid=${API_KEY}`);
 
-    state.forecast = data.list;
+    const { city } = data;
+
+    state.forecast.city = city;
+
+    state.forecast.days = createDayObject(data);
+    state.forecast.current = createCurrentObject(data);
+
+    console.log(state.forecast.days);
+
     state.hourly = data.list.slice(0, 8);
   } catch (err) {
     console.error(`${err} !!!`);
@@ -30,13 +31,30 @@ export const loadForecast = async function (city) {
   }
 };
 
-export const loadWeather = async function (city) {
-  try {
-    const data = await getJSON(`${API_WEATHER}q=${city}&appid=${API_KEY}`);
+const createCurrentObject = function (data) {
+  const { list } = data;
 
-    state.weather = createWeatherObject(data);
-  } catch (err) {
-    console.error(`${err} !!!`);
-    throw err;
-  }
+  return {
+    main: list[0].main,
+    weather: list[0].weather[0],
+  };
+};
+
+const createDayObject = function (data) {
+  const { list } = data;
+  return list.reduce((acc, curr) => {
+    let date = curr.dt_txt.split(" ")[0];
+    // console.log(date);
+
+    if (!acc[date]) acc[date] = [];
+
+    acc[date].push({
+      main: curr.weather[0].main,
+      desc: curr.weather[0].description,
+      icon: curr.weather[0].icon,
+      temp: curr.main,
+      dateTime: new Date(curr.dt_txt),
+    });
+    return acc;
+  }, []);
 };

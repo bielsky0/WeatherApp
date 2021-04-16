@@ -7,7 +7,7 @@ class HourlyView extends view {
       return `
     <li class="result--hour-item">
       <div class="result--hour">
-        <h2>${result.dt_txt.slice(-8)}</h2>
+        <h2>${result.dt_txt.slice(-8).slice(0, 5)}</h2>
         <span>${result.weather[0].main}</span>
         <h2>${result.main.temp}K</h2>
       </div>

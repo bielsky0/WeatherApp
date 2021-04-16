@@ -457,12 +457,14 @@ if (module.hot) {
 }
 const controlWeather = async function (city) {
   try {
-    await _modelJs.loadWeather(city);
+    _viewCurrentViewJsDefault.default.renderSpinner();
+    _viewHourlyViewJsDefault.default.renderSpinner();
     await _modelJs.loadForecast(city);
-    _viewCurrentViewJsDefault.default.render(_modelJs.state.weather);
+    _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast);
     _viewHourlyViewJsDefault.default.render(_modelJs.state.hourly);
-    console.log(_modelJs.state.hourly);
   } catch (err) {
+    _viewCurrentViewJsDefault.default.renderError(err.message);
+    _viewHourlyViewJsDefault.default.renderError(err.message);
     console.error(err);
   }
 };
@@ -471,7 +473,7 @@ const init = function () {
 };
 init();
 
-},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","./view/currentView.js":"3BGsU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./view/hourlyView.js":"3mJKf"}],"62Qib":[function(require,module,exports) {
+},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","./view/currentView.js":"3BGsU","./view/hourlyView.js":"3mJKf","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"62Qib":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1230,44 +1232,53 @@ _parcelHelpers.export(exports, "state", function () {
 _parcelHelpers.export(exports, "loadForecast", function () {
   return loadForecast;
 });
-_parcelHelpers.export(exports, "loadWeather", function () {
-  return loadWeather;
-});
 require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
 const state = {
-  forecast: {},
-  weather: {},
+  forecast: {
+    city: {},
+    days: [],
+    current: {}
+  },
   hourly: {}
 };
-const createWeatherObject = function (data) {
-  const weather = data;
-  return {
-    name: weather.name,
-    main: weather.main,
-    dt: weather.dt,
-    weather: weather.weather[0]
-  };
-};
-const loadForecast = async function (city) {
+const loadForecast = async function (place) {
   try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${city}&appid=${_configJs.API_KEY}`);
-    state.forecast = data.list;
+    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${place}&appid=${_configJs.API_KEY}`);
+    const {city} = data;
+    state.forecast.city = city;
+    state.forecast.days = createDayObject(data);
+    state.forecast.current = createCurrentObject(data);
+    console.log(state.forecast.days);
     state.hourly = data.list.slice(0, 8);
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
   }
 };
-const loadWeather = async function (city) {
-  try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}q=${city}&appid=${_configJs.API_KEY}`);
-    state.weather = createWeatherObject(data);
-  } catch (err) {
-    console.error(`${err} !!!`);
-    throw err;
-  }
+const createCurrentObject = function (data) {
+  const {list} = data;
+  return {
+    main: list[0].main,
+    weather: list[0].weather[0]
+  };
+};
+const createDayObject = function (data) {
+  const {list} = data;
+  return list.reduce((acc, curr) => {
+    let date = curr.dt_txt.split(" ")[0];
+    // console.log(date);
+    if (!acc[date]) acc[date] = [];
+    acc[date].push({
+      main: curr.weather[0].main,
+      desc: curr.weather[0].description,
+      icon: curr.weather[0].icon,
+      temp: curr.main,
+      dateTime: new Date(curr.dt_txt)
+    });
+    return acc;
+  }, []);
 };
 
 },{"regenerator-runtime":"62Qib","./config.js":"5yJJr","./helpers.js":"1K0Ha","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5yJJr":[function(require,module,exports) {
@@ -1423,6 +1434,27 @@ class View {
   _clear() {
     this._parentElement.innerHTML = "";
   }
+  renderSpinner() {
+    const markup = `
+  <div class="spinner">
+   <h2>XD</h2>
+  </div>
+    `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+  renderError(message = this._errorMessage) {
+    const markup = `
+  <div class="error">
+    <div>
+       <h2>Something went wrong :(</h2>
+    </div>
+    <p>${message}</p>
+  </div>
+    `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
 }
 exports.default = View;
 
@@ -1492,9 +1524,9 @@ class CurrentView extends _viewDefault.default {
   }
   _generateMarkup() {
     return `
-    <h2>${this._data.name}</h2>
-    <span>${this._data.weather.main}</span>
-    <h2>${this._data.main.temp}K</h2>
+    <h2>${this._data.city.name}</h2>
+    <span>${this._data.current.weather.main}</span>
+    <h2>${this._data.current.main.temp}K</h2>
     `;
   }
 }
@@ -1528,7 +1560,7 @@ class HourlyView extends _viewJsDefault.default {
       return `
     <li class="result--hour-item">
       <div class="result--hour">
-        <h2>${result.dt_txt.slice(-8)}</h2>
+        <h2>${result.dt_txt.slice(-8).slice(0, 5)}</h2>
         <span>${result.weather[0].main}</span>
         <h2>${result.main.temp}K</h2>
       </div>

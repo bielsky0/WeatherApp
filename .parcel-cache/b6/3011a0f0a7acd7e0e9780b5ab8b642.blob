@@ -1,0 +1,48 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "state", function () {
+  return state;
+});
+_parcelHelpers.export(exports, "loadForecast", function () {
+  return loadForecast;
+});
+require("regenerator-runtime");
+var _configJs = require("./config.js");
+var _helpersJs = require("./helpers.js");
+const state = {
+  forecast: {
+    days: {},
+    city: {},
+    list: {}
+  },
+  weather: {},
+  hourly: {}
+};
+const loadForecast = async function (place) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${place}&appid=${_configJs.API_KEY}`);
+    const {city, list} = data;
+    state.forecast.city = city;
+    state.forecast.list = list;
+    // console.log(state.forecast.city);
+    // console.log(state.forecast.list);
+    console.log(state.forecast);
+    state.forecast.days = data.list.reduce((prev, current) => {
+      let date = current.dt_txt.split(" ")[0];
+      console.log(date);
+      if (!prev[date]) prev[date] = [];
+      prev[date].push({
+        main: current.weather[0].main,
+        desc: current.weather[0].description,
+        icon: current.weather[0].icon,
+        temp: current.main,
+        dateTime: new Date(current.dt_txt)
+      });
+      return prev;
+    }, []);
+    state.hourly = data.list.slice(0, 8);
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
+};
