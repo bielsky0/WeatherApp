@@ -3,8 +3,9 @@ class HourlyView extends view {
   _parentElement = document.querySelector(".results--hour--list");
 
   _generateMarkup() {
-    return this._data.map((result) => {
-      return `
+    return this._data
+      .map((result) => {
+        return `
     <li class="result--hour-item">
       <div class="result--hour">
         <h2>${result.dt_txt.slice(-8).slice(0, 5)}</h2>
@@ -13,7 +14,8 @@ class HourlyView extends view {
       </div>
     </li>
           `;
-    });
+      })
+      .join("");
   }
 }
 

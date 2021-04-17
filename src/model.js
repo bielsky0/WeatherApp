@@ -1,5 +1,5 @@
 import { async } from "regenerator-runtime";
-import { API_KEY, API_FORECAST } from "./config.js";
+import { API_KEY, API_WEATHER, API_FORECAST } from "./config.js";
 import { getJSON } from "./helpers.js";
 
 export const state = {
@@ -9,6 +9,33 @@ export const state = {
     current: {},
   },
   hourly: {},
+  day: 1,
+};
+export const loadForecastByCoords = async function (lat, lng) {
+  try {
+    const data = await getJSON(
+      `${API_FORECAST}lat=${lat}&lon=${lng}&appid=${API_KEY}`
+    );
+
+    const { city } = data;
+
+    state.forecast.city = city;
+    state.forecast.list = data.list;
+
+    state.forecast.days = [];
+
+    for (let i = 0; i < data.list.length; i += 8) {
+      state.forecast.days.push({
+        main: data.list[i].main,
+        dt: data.list[i].dt,
+        dt_txt: data.list[i].dt_txt,
+        weather: data.list[i].weather[0],
+      });
+    }
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
 };
 
 export const loadForecast = async function (place) {
@@ -18,43 +45,62 @@ export const loadForecast = async function (place) {
     const { city } = data;
 
     state.forecast.city = city;
+    state.forecast.list = data.list;
 
-    state.forecast.days = createDayObject(data);
-    state.forecast.current = createCurrentObject(data);
+    state.forecast.days = [];
 
-    console.log(state.forecast.days);
-
-    state.hourly = data.list.slice(0, 8);
+    for (let i = 0; i < data.list.length; i += 8) {
+      state.forecast.days.push({
+        main: data.list[i].main,
+        dt: data.list[i].dt,
+        dt_txt: data.list[i].dt_txt,
+        weather: data.list[i].weather[0],
+      });
+    }
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
   }
 };
 
-const createCurrentObject = function (data) {
-  const { list } = data;
+export const loadCurrnetWeather = async function (place) {
+  try {
+    const data = await getJSON(`${API_WEATHER}q=${place}&appid=${API_KEY}`);
 
-  return {
-    main: list[0].main,
-    weather: list[0].weather[0],
-  };
+    state.forecast.current = createCurrentObject(data);
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
 };
 
-const createDayObject = function (data) {
-  const { list } = data;
-  return list.reduce((acc, curr) => {
-    let date = curr.dt_txt.split(" ")[0];
-    // console.log(date);
+export const loadCurrentWeatherByCoords = async function (lat, lng) {
+  try {
+    const data = await getJSON(
+      `${API_WEATHER}lat=${lat}&lon=${lng}&appid=${API_KEY}`
+    );
 
-    if (!acc[date]) acc[date] = [];
+    state.forecast.current = createCurrentObject(data);
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
+};
 
-    acc[date].push({
-      main: curr.weather[0].main,
-      desc: curr.weather[0].description,
-      icon: curr.weather[0].icon,
-      temp: curr.main,
-      dateTime: new Date(curr.dt_txt),
-    });
-    return acc;
-  }, []);
+export const getHourResult = function (day = state.day) {
+  state.day = day;
+
+  const start = (day - 1) * 8;
+  const end = day * 8;
+  return state.forecast.list.slice(start, end);
+};
+
+const createCurrentObject = function (data) {
+  return {
+    main: data.main,
+    weather: data.weather[0],
+    coords: data.coord,
+    name: data.name,
+    dt: data.dt,
+  };
 };

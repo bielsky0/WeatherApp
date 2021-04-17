@@ -444,36 +444,73 @@ id) /*: string*/
 },{}],"BvQis":[function(require,module,exports) {
 require("regenerator-runtime");
 var _modelJs = require("./model.js");
-require("./view/mapView.js");
-var _viewSearchViewJs = require("./view/searchView.js");
+var _viewMapViewJs = require("./view/mapView.js");
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _viewMapViewJsDefault = _parcelHelpers.interopDefault(_viewMapViewJs);
+var _viewSearchViewJs = require("./view/searchView.js");
 var _viewSearchViewJsDefault = _parcelHelpers.interopDefault(_viewSearchViewJs);
 var _viewCurrentViewJs = require("./view/currentView.js");
 var _viewCurrentViewJsDefault = _parcelHelpers.interopDefault(_viewCurrentViewJs);
 var _viewHourlyViewJs = require("./view/hourlyView.js");
 var _viewHourlyViewJsDefault = _parcelHelpers.interopDefault(_viewHourlyViewJs);
+var _viewFiveDayForecastViewJs = require("./view/fiveDayForecastView.js");
+var _viewFiveDayForecastViewJsDefault = _parcelHelpers.interopDefault(_viewFiveDayForecastViewJs);
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept(function () {
+    window.location.reload();
+  });
 }
+const displayMarker = function (latlng) {
+  if (_viewMapViewJsDefault.default.marker) {
+    _viewMapViewJsDefault.default.map.removeLayer(_viewMapViewJsDefault.default.marker);
+  }
+  _viewMapViewJsDefault.default.marker = new L.Marker(latlng).addTo(_viewMapViewJsDefault.default.map);
+  _viewMapViewJsDefault.default.map.setView(latlng, 5, {
+    animate: true,
+    pan: {
+      duration: 1
+    }
+  });
+};
 const controlWeather = async function (city) {
   try {
+    // Render spinners
     _viewCurrentViewJsDefault.default.renderSpinner();
     _viewHourlyViewJsDefault.default.renderSpinner();
+    _viewFiveDayForecastViewJsDefault.default.renderSpinner();
+    // Get data
+    await _modelJs.loadCurrnetWeather(city);
     await _modelJs.loadForecast(city);
-    _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast);
-    _viewHourlyViewJsDefault.default.render(_modelJs.state.hourly);
+    // Render data
+    _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current);
+    _viewHourlyViewJsDefault.default.render(_modelJs.getHourResult(1));
+    _viewFiveDayForecastViewJsDefault.default.render(_modelJs.state.forecast.days);
+    displayMarker(_modelJs.state.forecast.city.coord);
   } catch (err) {
     _viewCurrentViewJsDefault.default.renderError(err.message);
     _viewHourlyViewJsDefault.default.renderError(err.message);
     console.error(err);
   }
 };
+const controlMap = async function (latlng) {
+  const {lat, lng} = latlng;
+  _viewCurrentViewJsDefault.default.renderSpinner();
+  _viewHourlyViewJsDefault.default.renderSpinner();
+  _viewFiveDayForecastViewJsDefault.default.renderSpinner();
+  await _modelJs.loadForecastByCoords(lat, lng);
+  await _modelJs.loadCurrentWeatherByCoords(lat, lng);
+  _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current);
+  _viewHourlyViewJsDefault.default.render(_modelJs.getHourResult(1));
+  _viewFiveDayForecastViewJsDefault.default.render(_modelJs.state.forecast.days);
+  displayMarker(latlng);
+};
 const init = function () {
   _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlWeather);
+  _viewMapViewJsDefault.default.addHandlerClick(controlMap);
 };
 init();
 
-},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","./view/currentView.js":"3BGsU","./view/hourlyView.js":"3mJKf","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"62Qib":[function(require,module,exports) {
+},{"regenerator-runtime":"62Qib","./model.js":"53sO2","./view/mapView.js":"6SY19","./view/searchView.js":"6MvEX","./view/currentView.js":"3BGsU","./view/hourlyView.js":"3mJKf","./view/fiveDayForecastView.js":"ae2ri","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"62Qib":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1229,8 +1266,20 @@ _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "state", function () {
   return state;
 });
+_parcelHelpers.export(exports, "loadForecastByCoords", function () {
+  return loadForecastByCoords;
+});
 _parcelHelpers.export(exports, "loadForecast", function () {
   return loadForecast;
+});
+_parcelHelpers.export(exports, "loadCurrnetWeather", function () {
+  return loadCurrnetWeather;
+});
+_parcelHelpers.export(exports, "loadCurrentWeatherByCoords", function () {
+  return loadCurrentWeatherByCoords;
+});
+_parcelHelpers.export(exports, "getHourResult", function () {
+  return getHourResult;
 });
 require("regenerator-runtime");
 var _configJs = require("./config.js");
@@ -1241,44 +1290,81 @@ const state = {
     days: [],
     current: {}
   },
-  hourly: {}
+  hourly: {},
+  day: 1
+};
+const loadForecastByCoords = async function (lat, lng) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}lat=${lat}&lon=${lng}&appid=${_configJs.API_KEY}`);
+    const {city} = data;
+    state.forecast.city = city;
+    state.forecast.list = data.list;
+    state.forecast.days = [];
+    for (let i = 0; i < data.list.length; i += 8) {
+      state.forecast.days.push({
+        main: data.list[i].main,
+        dt: data.list[i].dt,
+        dt_txt: data.list[i].dt_txt,
+        weather: data.list[i].weather[0]
+      });
+    }
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
 };
 const loadForecast = async function (place) {
   try {
     const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${place}&appid=${_configJs.API_KEY}`);
     const {city} = data;
     state.forecast.city = city;
-    state.forecast.days = createDayObject(data);
-    state.forecast.current = createCurrentObject(data);
-    console.log(state.forecast.days);
-    state.hourly = data.list.slice(0, 8);
+    state.forecast.list = data.list;
+    state.forecast.days = [];
+    for (let i = 0; i < data.list.length; i += 8) {
+      state.forecast.days.push({
+        main: data.list[i].main,
+        dt: data.list[i].dt,
+        dt_txt: data.list[i].dt_txt,
+        weather: data.list[i].weather[0]
+      });
+    }
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
   }
 };
-const createCurrentObject = function (data) {
-  const {list} = data;
-  return {
-    main: list[0].main,
-    weather: list[0].weather[0]
-  };
+const loadCurrnetWeather = async function (place) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}q=${place}&appid=${_configJs.API_KEY}`);
+    state.forecast.current = createCurrentObject(data);
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
 };
-const createDayObject = function (data) {
-  const {list} = data;
-  return list.reduce((acc, curr) => {
-    let date = curr.dt_txt.split(" ")[0];
-    // console.log(date);
-    if (!acc[date]) acc[date] = [];
-    acc[date].push({
-      main: curr.weather[0].main,
-      desc: curr.weather[0].description,
-      icon: curr.weather[0].icon,
-      temp: curr.main,
-      dateTime: new Date(curr.dt_txt)
-    });
-    return acc;
-  }, []);
+const loadCurrentWeatherByCoords = async function (lat, lng) {
+  try {
+    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}lat=${lat}&lon=${lng}&appid=${_configJs.API_KEY}`);
+    state.forecast.current = createCurrentObject(data);
+  } catch (err) {
+    console.error(`${err} !!!`);
+    throw err;
+  }
+};
+const getHourResult = function (day = state.day) {
+  state.day = day;
+  const start = (day - 1) * 8;
+  const end = day * 8;
+  return state.forecast.list.slice(start, end);
+};
+const createCurrentObject = function (data) {
+  return {
+    main: data.main,
+    weather: data.weather[0],
+    coords: data.coord,
+    name: data.name,
+    dt: data.dt
+  };
 };
 
 },{"regenerator-runtime":"62Qib","./config.js":"5yJJr","./helpers.js":"1K0Ha","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5yJJr":[function(require,module,exports) {
@@ -1391,16 +1477,23 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 class MapView extends _viewJsDefault.default {
-  constructor() {
-    super();
+  constructor(...args) {
+    super(...args);
     _defineProperty(this, "_parentElement", document.querySelector(".search"));
-    _defineProperty(this, "_map", L.map("map").setView([51.505, -0.09], 13));
-    this._loadMap();
+    _defineProperty(this, "_titleLayer", new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }));
+    _defineProperty(this, "map", new L.map("map", {
+      center: [0, 0],
+      zoom: 3,
+      layers: [this._titleLayer]
+    }));
+    _defineProperty(this, "marker", void 0);
   }
-  _loadMap() {
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this._map);
+  addHandlerClick(handler) {
+    this.map.on("click", function (e) {
+      handler(e.latlng);
+    });
   }
 }
 exports.default = new MapView();
@@ -1524,9 +1617,9 @@ class CurrentView extends _viewDefault.default {
   }
   _generateMarkup() {
     return `
-    <h2>${this._data.city.name}</h2>
-    <span>${this._data.current.weather.main}</span>
-    <h2>${this._data.current.main.temp}K</h2>
+    <h2>${this._data.name}</h2>
+    <span>${this._data.weather.main}</span>
+    <h2>${this._data.main.temp}K</h2>
     `;
   }
 }
@@ -1566,10 +1659,49 @@ class HourlyView extends _viewJsDefault.default {
       </div>
     </li>
           `;
-    });
+    }).join("");
   }
 }
 exports.default = new HourlyView();
+
+},{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"ae2ri":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./view.js");
+var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class fiveDayForecastView extends _viewJsDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentElement", document.querySelector(".results--week--list"));
+  }
+  _generateMarkup() {
+    return this._data.map(result => {
+      return `
+     <li class="results--week-item">
+        <div class="results--week">
+            <h2>${result.dt_txt.split(" ")[0].slice(5, 10)}</h2>
+            <span>${result.weather.main}</span>
+            <h2>${result.main.temp}K</h2>
+        </div>
+     </li>
+        `;
+    }).join("");
+  }
+}
+exports.default = new fiveDayForecastView();
 
 },{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
 

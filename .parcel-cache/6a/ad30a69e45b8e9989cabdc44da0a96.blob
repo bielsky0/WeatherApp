@@ -1,0 +1,48 @@
+require("regenerator-runtime");
+var _modelJs = require("./model.js");
+var _viewMapViewJs = require("./view/mapView.js");
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _viewMapViewJsDefault = _parcelHelpers.interopDefault(_viewMapViewJs);
+var _viewSearchViewJs = require("./view/searchView.js");
+var _viewSearchViewJsDefault = _parcelHelpers.interopDefault(_viewSearchViewJs);
+var _viewCurrentViewJs = require("./view/currentView.js");
+var _viewCurrentViewJsDefault = _parcelHelpers.interopDefault(_viewCurrentViewJs);
+var _viewHourlyViewJs = require("./view/hourlyView.js");
+var _viewHourlyViewJsDefault = _parcelHelpers.interopDefault(_viewHourlyViewJs);
+var _viewFiveDayForecastViewJs = require("./view/fiveDayForecastView.js");
+var _viewFiveDayForecastViewJsDefault = _parcelHelpers.interopDefault(_viewFiveDayForecastViewJs);
+if (module.hot) {
+  module.hot.accept(function () {
+    window.location.reload();
+  });
+}
+const controlWeather = async function (city) {
+  try {
+    // Render spinners
+    _viewCurrentViewJsDefault.default.renderSpinner();
+    _viewHourlyViewJsDefault.default.renderSpinner();
+    _viewFiveDayForecastViewJsDefault.default.renderSpinner();
+    // Get data
+    await _modelJs.loadCurrnetWeather(city);
+    await _modelJs.loadForecast(city);
+    // Render data
+    _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current);
+    _viewHourlyViewJsDefault.default.render(_modelJs.getHourResult(1));
+    _viewFiveDayForecastViewJsDefault.default.render(_modelJs.state.forecast.days);
+  } catch (err) {
+    _viewCurrentViewJsDefault.default.renderError(err.message);
+    _viewHourlyViewJsDefault.default.renderError(err.message);
+    console.error(err);
+  }
+};
+const controlMap = function (latlng) {
+  if (_viewMapViewJsDefault.default.marker) {
+    _viewMapViewJsDefault.default.map.removeLayer(_viewMapViewJsDefault.default.marker);
+  }
+  _viewMapViewJsDefault.default.marker = new L.Marker(latlng);
+};
+const init = function () {
+  _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlWeather);
+  _viewMapViewJsDefault.default.addHandlerClick(controlMap);
+};
+init();

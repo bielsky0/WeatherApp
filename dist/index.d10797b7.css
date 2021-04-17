@@ -109,7 +109,7 @@ a {
   text-align: center;
 }
 .spinner h2 {
-  animation: rotate 2s infinite linear;
+  animation: rotate 1s infinite linear;
 }
 
 @keyframes rotate {
