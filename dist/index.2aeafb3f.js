@@ -504,9 +504,14 @@ const controlMap = async function (latlng) {
   _viewFiveDayForecastViewJsDefault.default.render(_modelJs.state.forecast.days);
   displayMarker(latlng);
 };
+const control3HourForecast = function (date) {
+  _modelJs.loadHourResults(date);
+  _viewHourlyViewJsDefault.default.render(_modelJs.state.hourly);
+};
 const init = function () {
   _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlWeather);
   _viewMapViewJsDefault.default.addHandlerClick(controlMap);
+  _viewFiveDayForecastViewJsDefault.default.addHandlerClick(control3HourForecast);
 };
 init();
 
@@ -1278,6 +1283,9 @@ _parcelHelpers.export(exports, "loadCurrnetWeather", function () {
 _parcelHelpers.export(exports, "loadCurrentWeatherByCoords", function () {
   return loadCurrentWeatherByCoords;
 });
+_parcelHelpers.export(exports, "loadHourResults", function () {
+  return loadHourResults;
+});
 _parcelHelpers.export(exports, "getHourResult", function () {
   return getHourResult;
 });
@@ -1290,7 +1298,7 @@ const state = {
     days: [],
     current: {}
   },
-  hourly: {},
+  hourly: [],
   day: 1
 };
 const loadForecastByCoords = async function (lat, lng) {
@@ -1328,6 +1336,11 @@ const loadForecast = async function (place) {
         weather: data.list[i].weather[0]
       });
     }
+    state.hourly = data.list.filter(weather => {
+      if (weather.dt_txt.split(" ")[0] === "2021-04-20") {
+        return weather;
+      }
+    });
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
@@ -1350,6 +1363,13 @@ const loadCurrentWeatherByCoords = async function (lat, lng) {
     console.error(`${err} !!!`);
     throw err;
   }
+};
+const loadHourResults = function (date) {
+  state.hourly = state.forecast.list.filter(weather => {
+    if (weather.dt_txt.split(" ")[0] === date) {
+      return weather;
+    }
+  });
 };
 const getHourResult = function (day = state.day) {
   state.day = day;
@@ -1687,10 +1707,19 @@ class fiveDayForecastView extends _viewJsDefault.default {
     super(...args);
     _defineProperty(this, "_parentElement", document.querySelector(".results--week--list"));
   }
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const el = e.target.closest(".results--week-item");
+      if (!el) return;
+      Array.from(el.parentElement.children).forEach(e => e.classList.remove("card"));
+      el.classList.add("card");
+      handler(el.dataset.date);
+    });
+  }
   _generateMarkup() {
     return this._data.map(result => {
       return `
-     <li class="results--week-item">
+     <li class="results--week-item" data-date="${result.dt_txt.split(" ")[0]}">
         <div class="results--week">
             <h2>${result.dt_txt.split(" ")[0].slice(5, 10)}</h2>
             <span>${result.weather.main}</span>

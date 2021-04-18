@@ -8,7 +8,7 @@ export const state = {
     days: [],
     current: {},
   },
-  hourly: {},
+  hourly: [],
   day: 1,
 };
 export const loadForecastByCoords = async function (lat, lng) {
@@ -57,6 +57,11 @@ export const loadForecast = async function (place) {
         weather: data.list[i].weather[0],
       });
     }
+    state.hourly = data.list.filter((weather) => {
+      if (weather.dt_txt.split(" ")[0] === "2021-04-20") {
+        return weather;
+      }
+    });
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
@@ -85,6 +90,13 @@ export const loadCurrentWeatherByCoords = async function (lat, lng) {
     console.error(`${err} !!!`);
     throw err;
   }
+};
+export const loadHourResults = function (date) {
+  state.hourly = state.forecast.list.filter((weather) => {
+    if (weather.dt_txt.split(" ")[0] === date) {
+      return weather;
+    }
+  });
 };
 
 export const getHourResult = function (day = state.day) {

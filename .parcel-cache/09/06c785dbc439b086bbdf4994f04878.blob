@@ -1,0 +1,46 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./view.js");
+var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class fiveDayForecastView extends _viewJsDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentElement", document.querySelector(".results--week--list"));
+  }
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const el = e.target.closest(".results--week");
+      const parentEl = e.target.closest(".results--week-item");
+      el.classList.add("card");
+      console.log(this._parentElement.childNodes);
+      handler(el.dataset.date);
+    });
+  }
+  _generateMarkup() {
+    return this._data.map(result => {
+      return `
+     <li class="results--week-item">
+        <div class="results--week" data-date="${result.dt_txt.split(" ")[0]}">
+            <h2>${result.dt_txt.split(" ")[0].slice(5, 10)}</h2>
+            <span>${result.weather.main}</span>
+            <h2>${result.main.temp}K</h2>
+        </div>
+     </li>
+        `;
+    }).join("");
+  }
+}
+exports.default = new fiveDayForecastView();

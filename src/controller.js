@@ -67,9 +67,20 @@ const controlMap = async function (latlng) {
   displayMarker(latlng);
 };
 
+const control3HourForecast = function (date) {
+  model.loadHourResults(date);
+
+  hourlyView.render(model.state.hourly);
+
+  // console.log(date);
+
+  // console.log(model.state.hourly);
+};
+
 const init = function () {
   searchView.addHandlerFormSubmit(controlWeather);
   mapView.addHandlerClick(controlMap);
+  fiveDayForecastView.addHandlerClick(control3HourForecast);
 };
 
 init();
