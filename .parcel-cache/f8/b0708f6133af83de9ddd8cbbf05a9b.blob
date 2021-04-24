@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.HASH_REF_d41ac7b8bb091472d0199314d10797b7.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <script defer="" src="/index.HASH_REF_88c4e112751b41a35af6d0652aeafb3f.js"></script>
+    <title>WeatherApp</title>
+  </head>
+  <body>
+    <header class="nav-con">
+      <form class="search-box">
+        <input class="search-input" placeholder="Search City, Place" type="text">
+        <button>GET FORECAST</button>
+      </form>
+      <div class="git">
+        <a href="#">GitHub</a>
+      </div>
+    </header>
+    <section>
+      <div class="container">
+        <div class="container-map">
+          <div id="map"></div>
+        </div>
+        <div class="container-forecast">
+          <div class="forecast-current">
+            <h2>Current Weather</h2>
+          </div>
+          <div class="forecast-hour">
+            <h2>3 Hour Weaher Forecast</h2>
+          </div>
+          <div class="forecast-week">
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="http://openweathermap.org/img/wn/01n.png" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="http://openweathermap.org/img/wn/01n.png" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="http://openweathermap.org/img/wn/01n.png" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="http://openweathermap.org/img/wn/01n.png" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result active">
+                <img src="http://openweathermap.org/img/wn/01n.png" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

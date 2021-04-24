@@ -18,7 +18,7 @@ const displayMarker = function (latlng) {
 
   mapView.marker = new L.Marker(latlng).addTo(mapView.map);
 
-  mapView.map.setView(latlng, 5, {
+  mapView.map.setView(latlng, 10, {
     animate: true,
     pan: {
       duration: 1,
@@ -36,6 +36,9 @@ const controlWeather = async function (city) {
     // Get data
     await model.loadCurrnetWeather(city);
     await model.loadForecast(city);
+
+    // console.log(model.state.forecast.current);
+    // console.log(new Date(1619267357 * 1000).toLocaleString().slice(11, 15));
 
     // Render data
     currentView.render(model.state.forecast.current);
@@ -71,10 +74,6 @@ const control3HourForecast = function (date) {
   model.loadHourResults(date);
 
   hourlyView.render(model.state.hourly);
-
-  // console.log(date);
-
-  // console.log(model.state.hourly);
 };
 
 const init = function () {

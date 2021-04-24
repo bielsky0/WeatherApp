@@ -13,40 +13,29 @@
     <title>WeatherApp</title>
   </head>
   <body>
-    <header class="navbar">
-      <div class="navbar--container">
-        <h1 class="logo">Weather Forecast</h1>
-        <nav>
-          <ul>
-            <li><a href="#">GitHub</a></li>
-          </ul>
-        </nav>
+    <header class="nav-con">
+      <form class="search-box">
+        <input class="search-input" placeholder="Search City, Place" type="text">
+        <button>GET FORECAST</button>
+      </form>
+      <div class="git">
+        <a href="#">GitHub</a>
       </div>
     </header>
-    <section class="main">
-      <div class="container--main">
-        <div class="search card">
-          <div class="search--form">
-            <h2>Type city</h2>
-            <form class="form">
-              <input class="input" placeholder="City">
-            </form>
-          </div>
-          <div id="map" class="card map"></div>
+    <section>
+      <div class="container">
+        <div class="container-map">
+          <div id="map"></div>
         </div>
-        <div class="results">
-          <div class="results--current card">
-            <h2>Start by typing city</h2>
+        <div class="container-forecast">
+          <div class="forecast-current">
+            <h2>Current Weather</h2>
           </div>
-          <div class="card results--hour">
-            <ul class="results--hour--list">
-              <h2>3 hour weather forecast</h2>
-            </ul>
+          <div class="forecast-hour">
+            <h2>3 Hour Weaher Forecast</h2>
           </div>
-          <div class="card results--week">
-            <ul class="results--week--list">
-              <h2>5 day weather forecast</h2>
-            </ul>
+          <div class="forecast-week">
+            <h2>5 day Weather Forecast</h2>
           </div>
         </div>
       </div>

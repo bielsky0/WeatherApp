@@ -14,7 +14,7 @@ export default class View {
   renderSpinner() {
     const markup = `
   <div class="spinner">
-   <h2>XD</h2>
+   <h2>X</h2>
   </div>
     `;
 

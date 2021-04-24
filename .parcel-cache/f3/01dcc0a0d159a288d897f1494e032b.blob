@@ -1,0 +1,32 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _view = require("./view");
+var _viewDefault = _parcelHelpers.interopDefault(_view);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class CurrentView extends _viewDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentElement", document.querySelector(".results--current"));
+    _defineProperty(this, "_parentElement", document.querySelector(""));
+  }
+  _generateMarkup() {
+    return `
+    <h2>${this._data.name}</h2>
+    <span>${this._data.weather.main}</span>
+    <h2>${this._data.main.temp}K</h2>
+    `;
+  }
+}
+exports.default = new CurrentView();

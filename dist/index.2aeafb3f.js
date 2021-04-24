@@ -465,7 +465,7 @@ const displayMarker = function (latlng) {
     _viewMapViewJsDefault.default.map.removeLayer(_viewMapViewJsDefault.default.marker);
   }
   _viewMapViewJsDefault.default.marker = new L.Marker(latlng).addTo(_viewMapViewJsDefault.default.map);
-  _viewMapViewJsDefault.default.map.setView(latlng, 5, {
+  _viewMapViewJsDefault.default.map.setView(latlng, 10, {
     animate: true,
     pan: {
       duration: 1
@@ -481,6 +481,8 @@ const controlWeather = async function (city) {
     // Get data
     await _modelJs.loadCurrnetWeather(city);
     await _modelJs.loadForecast(city);
+    // console.log(model.state.forecast.current);
+    // console.log(new Date(1619267357 * 1000).toLocaleString().slice(11, 15));
     // Render data
     _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current);
     _viewHourlyViewJsDefault.default.render(_modelJs.getHourResult(1));
@@ -1327,6 +1329,7 @@ const loadForecast = async function (place) {
     const {city} = data;
     state.forecast.city = city;
     state.forecast.list = data.list;
+    // console.log(data);
     state.forecast.days = [];
     for (let i = 0; i < data.list.length; i += 8) {
       state.forecast.days.push({
@@ -1336,11 +1339,6 @@ const loadForecast = async function (place) {
         weather: data.list[i].weather[0]
       });
     }
-    state.hourly = data.list.filter(weather => {
-      if (weather.dt_txt.split(" ")[0] === "2021-04-20") {
-        return weather;
-      }
-    });
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
@@ -1402,6 +1400,9 @@ _parcelHelpers.export(exports, "API_FORECAST", function () {
 _parcelHelpers.export(exports, "ICONS_URL", function () {
   return ICONS_URL;
 });
+_parcelHelpers.export(exports, "WEEKDAYS", function () {
+  return WEEKDAYS;
+});
 _parcelHelpers.export(exports, "TIMEOUT_SEC", function () {
   return TIMEOUT_SEC;
 });
@@ -1409,6 +1410,7 @@ const API_KEY = "f5f020080e0a829ea7030c7f024953d2";
 const API_WEATHER = "http://api.openweathermap.org/data/2.5/weather?";
 const API_FORECAST = "http://api.openweathermap.org/data/2.5/forecast?";
 const ICONS_URL = "http://openweathermap.org/img/wn/";
+const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const TIMEOUT_SEC = 10;
 
 },{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5gA8y":[function(require,module,exports) {
@@ -1550,7 +1552,7 @@ class View {
   renderSpinner() {
     const markup = `
   <div class="spinner">
-   <h2>XD</h2>
+   <h2>X</h2>
   </div>
     `;
     this._clear();
@@ -1593,17 +1595,16 @@ class SearchView extends _viewJsDefault.default {
   constructor(...args) {
     super(...args);
     _defineProperty(this, "_parentElement", document.querySelector(".search"));
-    _defineProperty(this, "_form", document.querySelector(".form"));
-    _defineProperty(this, "_input", document.querySelector(".input"));
+    _defineProperty(this, "_form", document.querySelector(".search-box"));
+    _defineProperty(this, "_input", document.querySelector(".search-input"));
   }
   _generateMarkup() {}
   addHandlerFormSubmit(handler) {
     this._form.addEventListener("submit", function (e) {
       e.preventDefault();
-      // Select input element form xdd array
       const inputEl = Array.from(e.target.childNodes).find(e => {
         if (e.classList) {
-          return e.classList.contains("input");
+          return e.classList.contains("search-input");
         }
       });
       handler(inputEl.value);
@@ -1617,6 +1618,7 @@ var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _view = require("./view");
 var _viewDefault = _parcelHelpers.interopDefault(_view);
+var _configJs = require("../config.js");
 function _defineProperty(obj, key, value) {
   if ((key in obj)) {
     Object.defineProperty(obj, key, {
@@ -1633,19 +1635,28 @@ function _defineProperty(obj, key, value) {
 class CurrentView extends _viewDefault.default {
   constructor(...args) {
     super(...args);
-    _defineProperty(this, "_parentElement", document.querySelector(".results--current"));
+    _defineProperty(this, "_parentElement", document.querySelector(".forecast-current"));
   }
   _generateMarkup() {
     return `
+  <div class="forecast-current-left">
+    <img src="http://openweathermap.org/img/wn/${this._data.weather.icon}@2x.png" alt="" />
+    <div class="desc-curr">
+      <h2>${this._data.weather.main}</h2>
+      <h2>${this._data.main.temp}°</h2>
+    </div>
+  </div>
+  <div class="forecast-current-right">
     <h2>${this._data.name}</h2>
-    <span>${this._data.weather.main}</span>
-    <h2>${this._data.main.temp}K</h2>
+    <h3>${_configJs.WEEKDAYS[new Date(this._data.dt * 1000).getDay()]} ${new Date(this._data.dt * 1000).toLocaleString().slice(11, 15) + new Date(this._data.dt * 1000).toLocaleString().slice(18)}</h3>
+    <h3>${this._data.weather.description}</h3>
+  </div>
     `;
   }
 }
 exports.default = new CurrentView();
 
-},{"./view":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"3mJKf":[function(require,module,exports) {
+},{"./view":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../config.js":"5yJJr"}],"3mJKf":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
@@ -1666,19 +1677,21 @@ function _defineProperty(obj, key, value) {
 class HourlyView extends _viewJsDefault.default {
   constructor(...args) {
     super(...args);
-    _defineProperty(this, "_parentElement", document.querySelector(".results--hour--list"));
+    _defineProperty(this, "_parentElement", document.querySelector(".forecast-hour"));
   }
   _generateMarkup() {
     return this._data.map(result => {
       return `
-    <li class="result--hour-item">
-      <div class="result--hour">
+    <li class="forecast-hour-item">
+      <div class="forecast-hour-result">
         <h2>${result.dt_txt.slice(-8).slice(0, 5)}</h2>
-        <span>${result.weather[0].main}</span>
-        <h2>${result.main.temp}K</h2>
+        <div class="desc-hour">
+          <span>${result.weather[0].main}</span>
+        </div>
+        <h2>${result.main.temp}°</h2>
       </div>
     </li>
-          `;
+        `;
     }).join("");
   }
 }
@@ -1689,6 +1702,7 @@ var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
+var _configJs = require("../config.js");
 function _defineProperty(obj, key, value) {
   if ((key in obj)) {
     Object.defineProperty(obj, key, {
@@ -1705,33 +1719,37 @@ function _defineProperty(obj, key, value) {
 class fiveDayForecastView extends _viewJsDefault.default {
   constructor(...args) {
     super(...args);
-    _defineProperty(this, "_parentElement", document.querySelector(".results--week--list"));
+    _defineProperty(this, "_parentElement", document.querySelector(".forecast-week"));
   }
   addHandlerClick(handler) {
     this._parentElement.addEventListener("click", function (e) {
-      const el = e.target.closest(".results--week-item");
+      const el = e.target.closest(".forecast-week-item");
       if (!el) return;
-      Array.from(el.parentElement.children).forEach(e => e.classList.remove("card"));
-      el.classList.add("card");
+      Array.from(el.parentElement.children).forEach(e => e.classList.remove("active"));
+      el.classList.add("active");
+      console.log(new Date(el.dataset.date).getDay());
       handler(el.dataset.date);
     });
   }
   _generateMarkup() {
     return this._data.map(result => {
       return `
-     <li class="results--week-item" data-date="${result.dt_txt.split(" ")[0]}">
-        <div class="results--week">
-            <h2>${result.dt_txt.split(" ")[0].slice(5, 10)}</h2>
+      <li class="forecast-week-item" data-date="${result.dt_txt.split(" ")[0]}">
+        <div class="forecast-week-result">
+          <img src="http://openweathermap.org/img/wn/${result.weather.icon}.png" alt="" />
+          <div class="desc-week">
+            <h2>${_configJs.WEEKDAYS[new Date(result.dt * 1000).getDay()]}</h2>
             <span>${result.weather.main}</span>
-            <h2>${result.main.temp}K</h2>
+            <h2>${result.main.temp}°</h2>
+          </div>
         </div>
-     </li>
+      </li>
         `;
     }).join("");
   }
 }
 exports.default = new fiveDayForecastView();
 
-},{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
+},{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../config.js":"5yJJr"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
 
 //# sourceMappingURL=index.2aeafb3f.js.map

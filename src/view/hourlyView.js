@@ -1,19 +1,21 @@
 import view from "./view.js";
 class HourlyView extends view {
-  _parentElement = document.querySelector(".results--hour--list");
+  _parentElement = document.querySelector(".forecast-hour");
 
   _generateMarkup() {
     return this._data
       .map((result) => {
         return `
-    <li class="result--hour-item">
-      <div class="result--hour">
+    <li class="forecast-hour-item">
+      <div class="forecast-hour-result">
         <h2>${result.dt_txt.slice(-8).slice(0, 5)}</h2>
-        <span>${result.weather[0].main}</span>
-        <h2>${result.main.temp}K</h2>
+        <div class="desc-hour">
+          <span>${result.weather[0].main}</span>
+        </div>
+        <h2>${result.main.temp}°</h2>
       </div>
     </li>
-          `;
+        `;
       })
       .join("");
   }

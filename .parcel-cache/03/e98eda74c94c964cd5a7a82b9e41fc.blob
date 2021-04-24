@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="6e710c600bdf8089f3bc267979606668">
+    <link href="aeb1b2ef3afe9d2dc63f426d87074fa2" rel="stylesheet">
+    <link rel="stylesheet" href="c83c5f62ec284552ebd60fcc880a3edf" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="">
+    <script src="a9cf643e1a290fac72e478b7c5dd7db2" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <script defer="" src="0a23a589e84c263a48ccce3ecd3ba9ca"></script>
+    <title>WeatherApp</title>
+  </head>
+  <body>
+    <header class="nav-con">
+      <form class="search-box">
+        <input class="search-input" placeholder="Search City, Place" type="text">
+        <button>GET FORECAST</button>
+      </form>
+      <div class="git">
+        <a href="#">GitHub</a>
+      </div>
+    </header>
+    <section>
+      <div class="container">
+        <div class="container-map">
+          <div id="map"></div>
+        </div>
+        <div class="container-forecast">
+          <div class="forecast-current">
+            <h2>Current Weather</h2>
+          </div>
+          <div class="forecast-hour">
+            <h2>3 Hour Weaher Forecast</h2>
+          </div>
+          <div class="forecast-week">
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="77a8a8414bc2b36de9c8b03decf81bbf" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="77a8a8414bc2b36de9c8b03decf81bbf" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="77a8a8414bc2b36de9c8b03decf81bbf" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result">
+                <img src="77a8a8414bc2b36de9c8b03decf81bbf" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+            <li class="forecast-week-item">
+              <div class="forecast-week-result active">
+                <img src="77a8a8414bc2b36de9c8b03decf81bbf" alt="">
+                <div class="desc-week">
+                  <h2>Mon</h2>
+                  <span>Sunny</span>
+                  <h2>14°</h2>
+                </div>
+              </div>
+            </li>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

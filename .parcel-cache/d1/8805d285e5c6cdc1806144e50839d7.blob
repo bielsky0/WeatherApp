@@ -1,0 +1,39 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./view.js");
+var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class SearchView extends _viewJsDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentElement", document.querySelector(".search"));
+    _defineProperty(this, "_form", document.querySelector(".search-box"));
+    _defineProperty(this, "_input", document.querySelector(".search-input"));
+  }
+  _generateMarkup() {}
+  addHandlerFormSubmit(handler) {
+    this._form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      // Select input element form xdd array
+      const inputEl = Array.from(e.target.childNodes).find(e => {
+        if (e.classList) {
+          return e.classList.contains("input");
+        }
+      });
+      handler(inputEl.value);
+    });
+  }
+}
+exports.default = new SearchView();

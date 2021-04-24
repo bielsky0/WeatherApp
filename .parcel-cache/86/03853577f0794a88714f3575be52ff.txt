@@ -16,7 +16,7 @@
 117C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@parcel\utils\lib\getCertificate.js121436361000000000 0
 139C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\jsdom\lib\jsdom\living\events\PageTransitionEvent-impl.js121436361000000000 0
 112C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\json\index.js121436361000000000 0
-91C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\searchView.js132628690218181757 0
+91C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\searchView.js132637389957091789 0
 145C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\is-generator-function\.github\workflows\require-allow-edits.yml121436361000000000 0
 108C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\tweetnacl\nacl-fast.min.js131260970840000000 0
 147C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\css-modules-loader-core\node_modules\source-map\lib\quick-sort.js131369414910000000 0
@@ -56,7 +56,7 @@
 120C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\whatwg-url\lib\URLSearchParams-impl.js121436361000000000 0
 96C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\.bin\escodegen132631543888168315 0
 112C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\es\typed-array\from.js121436361000000000 0
-73C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist132632592544183095 1
+73C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist132637431084192789 1
 105C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\lodash\fp\forInRight.js121436361000000000 0
 139C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\stylehacks\node_modules\chalk\node_modules\supports-color132631543848886386 1
 92C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\source-map132631543850950837 1
@@ -103,7 +103,7 @@
 127C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@babel\core\lib\config\files\index-browser.js121012626000000000 0
 111C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\stable\parse-float.js121436361000000000 0
 129C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-ordered-values\dist\rules\transition.js121436361000000000 0
-79C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\index.html132631618575835309 0
+79C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\index.html132637423300035693 0
 130C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@babel\plugin-transform-parameters\lib\params.js121012626000000000 0
 107C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\lodash\_createBaseEach.js121436361000000000 0
 103C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\vm-browserify\example132631543686159342 1
@@ -142,7 +142,7 @@
 126C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\resolve\test\shadowed_core\node_modules\util132631543747577187 1
 127C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@babel\types\lib\validators\matchesPattern.js121012626000000000 0
 90C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@nodelib132631543803566553 1
-82C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\config.js132631643570812934 0
+82C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\config.js132637408418298881 0
 97C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\srcset\index.js121436361000000000 0
 140C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\regenerate-unicode-properties\Script_Extensions\Bengali.js121436361000000000 0
 125C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\reflect\define-metadata.js121436361000000000 0
@@ -197,7 +197,7 @@
 100C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\yallist\yallist.js121436361000000000 0
 145C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-discard-overridden\node_modules\postcss\lib\tokenize.js121436361000000000 0
 104C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@parcel\config-default132631543842064613 1
-86C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\controller.js132632570709371704 0
+86C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\controller.js132637430149797827 0
 114C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\es-abstract\2015\StringCreate.js121436361000000000 0
 103C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\object.values\auto.js121436361000000000 0
 112C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\web\queue-microtask.js121436361000000000 0
@@ -214,7 +214,7 @@
 144C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-unique-selectors\node_modules\postcss\lib\stringify.js121436361000000000 0
 114C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\es-abstract\2016\ObjectCreate.js121436361000000000 0
 105C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\lodash\toPlainObject.js121436361000000000 0
-92C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\currentView.js132632188833205347 0
+92C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\currentView.js132637420768923779 0
 111C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@nodelib\fs.walk\src\index.ts121436361000000000 0
 155C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\regenerate-unicode-properties\Script_Extensions\Inscriptional_Parthian.js121436361000000000 0
 109C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\css-tree\lib\lexer\Lexer.js121436361000000000 0
@@ -235,7 +235,7 @@
 114C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\request-promise-native\README.md121436361000000000 0
 164C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-unique-selectors\node_modules\chalk\node_modules\supports-color\browser.js131663821590000000 0
 95C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\is-typedarray132631543861712046 1
-81C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\model.js132632564456301985 0
+81C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\model.js132637317138956542 0
 138C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-ordered-values\node_modules\color-name\README.md131339336430000000 0
 113C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\available-typed-arrays\index.js121436361000000000 0
 149C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\uncss\node_modules\postcss-selector-parser\dist\selectors\guards.js121436361000000000 0
@@ -249,7 +249,7 @@
 85C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\sax132631543851210156 1
 111C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\modules\es.promise.js121436361000000000 0
 157C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@parcel\transformer-html\node_modules\htmlparser2\lib\MultiplexHandler.d.ts121436361000000000 0
-100C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\fiveDayForecastView.js132632589202900778 0
+100C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\fiveDayForecastView.js132637431082865891 0
 129C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-selector-parser\dist\selectors\index.js121436361000000000 0
 99C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\lodash\fp\trim.js121436361000000000 0
 113C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\caniuse-lite\data\regions\AZ.js121436361000000000 0
@@ -271,13 +271,13 @@
 93C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\ansi-styles132631543872822326 1
 161C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@babel\plugin-bugfix-v8-spread-parameters-in-optional-chaining\lib\index.js.map121012626000000000 0
 102C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\prelude-ls\README.md130566013780000000 0
-91C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\hourlyView.js132630654429310299 0
+91C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\hourlyView.js132637413519845460 0
 118C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\reflect\metadata.js121436361000000000 0
 96C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\lodash\drop.js121436361000000000 0
 115C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\es-abstract\2017\ToPropertyKey.js121436361000000000 0
 100C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\is-url\.travis.yml131665623310000000 0
 94C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\resolve-from132631543852217480 1
-88C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\mapView.js132631612198853732 0
+88C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\mapView.js132637378833450171 0
 115C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\highlight.js\styles\a11y-dark.css121436361000000000 0
 98C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\wrappy\wrappy.js131080005270000000 0
 144C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\cssnano-preset-default\node_modules\color-convert\CHANGELOG.md121436361000000000 0
@@ -297,9 +297,9 @@
 94C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\color-string132631543851010677 1
 114C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\es-abstract\2017\StringCreate.js121436361000000000 0
 115C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\internals\regexp-flags.js121436361000000000 0
-85C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\view.js132629939695217746 0
+85C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\view\view.js132636326825000673 0
 108C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\uri-js\dist\es5\uri.all.js121436361000000000 0
-86C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\css\style.css132632592542821417 0
+86C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\src\css\style.css132637424837954339 0
 143C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\regenerate-unicode-properties\Script_Extensions\Old_Italic.js121436361000000000 0
 100C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\lodash\fp\curry.js121436361000000000 0
 110C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\es-abstract\2015\MakeTime.js121436361000000000 0
@@ -4971,7 +4971,7 @@
 104C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\svgo\lib\svgo\jsAPI.js121436361000000000 0
 109C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\object.assign\test\index.js121436361000000000 0
 104C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\svgo\lib\svgo\tools.js121436361000000000 0
-84C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.html132632592544140120 0
+84C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.html132637431084132458 0
 101C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\lodash\_nodeUtil.js121436361000000000 0
 95C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\svgo\bin\svgo121436361000000000 0
 104C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\stylehacks\LICENSE-MIT121436361000000000 0
@@ -17373,7 +17373,7 @@
 124C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\typed-array\find-index.js121436361000000000 0
 129C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\typed-array\find-last-index.js121436361000000000 0
 118C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\typed-array\find.js121436361000000000 0
-96C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css.map132632592544173130 0
+96C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css.map132637431084176569 0
 108C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\@parcel\core\src\Parcel.js121436361000000000 0
 127C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\typed-array\float32-array.js121436361000000000 0
 113C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\caniuse-lite\data\regions\PY.js121436361000000000 0
@@ -20815,6 +20815,6 @@
 91C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\.bin\uuid132631543887799322 0
 96C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\.bin\which.cmd132631543887948889 0
 96C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\node_modules\.bin\which.ps1132631543887948889 0
-91C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js132632592544140120 0
-95C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js.map132632592544173130 0
-92C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css132632592544140120 0
+91C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js132637431084132458 0
+95C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js.map132637431084182786 0
+92C:\Users\48795\OneDrive\Pulpit\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css132637431084132458 0

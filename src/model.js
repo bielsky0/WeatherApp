@@ -47,6 +47,7 @@ export const loadForecast = async function (place) {
     state.forecast.city = city;
     state.forecast.list = data.list;
 
+    // console.log(data);
     state.forecast.days = [];
 
     for (let i = 0; i < data.list.length; i += 8) {
@@ -57,11 +58,6 @@ export const loadForecast = async function (place) {
         weather: data.list[i].weather[0],
       });
     }
-    state.hourly = data.list.filter((weather) => {
-      if (weather.dt_txt.split(" ")[0] === "2021-04-20") {
-        return weather;
-      }
-    });
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
