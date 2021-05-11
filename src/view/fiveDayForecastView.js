@@ -15,7 +15,6 @@ class fiveDayForecastView extends view {
       );
 
       el.classList.add("active");
-      console.log(new Date(el.dataset.date).getDay());
 
       handler(el.dataset.date);
     });
@@ -23,9 +22,11 @@ class fiveDayForecastView extends view {
 
   _generateMarkup() {
     return this._data
-      .map((result) => {
+      .map((result, i) => {
         return `
-      <li class="forecast-week-item" data-date="${result.dt_txt.split(" ")[0]}">
+      <li class="forecast-week-item ${i === 0 ? "active" : ""}" data-date="${
+          result.dt_txt.split(" ")[0]
+        }">
         <div class="forecast-week-result">
           <img src="http://openweathermap.org/img/wn/${
             result.weather.icon
@@ -33,7 +34,7 @@ class fiveDayForecastView extends view {
           <div class="desc-week">
             <h2>${WEEKDAYS[new Date(result.dt * 1000).getDay()]}</h2>
             <span>${result.weather.main}</span>
-            <h2>${result.main.temp}°</h2>
+            <h2>${result.main.temp}°C</h2>
           </div>
         </div>
       </li>

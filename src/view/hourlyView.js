@@ -12,7 +12,7 @@ class HourlyView extends view {
         <div class="desc-hour">
           <span>${result.weather[0].main}</span>
         </div>
-        <h2>${result.main.temp}°</h2>
+        <h2>${result.main.temp}°C</h2>
       </div>
     </li>
         `;

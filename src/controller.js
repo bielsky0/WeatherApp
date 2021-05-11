@@ -34,22 +34,19 @@ const controlWeather = async function (city) {
     fiveDayForecastView.renderSpinner();
 
     // Get data
-    await model.loadCurrnetWeather(city);
     await model.loadForecast(city);
 
-    // console.log(model.state.forecast.current);
-    // console.log(new Date(1619267357 * 1000).toLocaleString().slice(11, 15));
-
     // Render data
-    currentView.render(model.state.forecast.current);
-    hourlyView.render(model.getHourResult(1));
+    currentView.render(model.state.forecast.current[0]);
+    hourlyView.render(model.state.forecast.hourly);
     fiveDayForecastView.render(model.state.forecast.days);
 
-    displayMarker(model.state.forecast.city.coord);
+    displayMarker(model.state.city.coord);
+    console.log(city);
   } catch (err) {
     currentView.renderError(err.message);
     hourlyView.renderError(err.message);
-    console.error(err);
+    fiveDayForecastView.renderError(err.message);
   }
 };
 
@@ -61,19 +58,21 @@ const controlMap = async function (latlng) {
   fiveDayForecastView.renderSpinner();
 
   await model.loadForecastByCoords(lat, lng);
-  await model.loadCurrentWeatherByCoords(lat, lng);
 
-  currentView.render(model.state.forecast.current);
-  hourlyView.render(model.getHourResult(1));
+  currentView.render(model.state.forecast.current[0]);
+  hourlyView.render(model.state.forecast.hourly);
   fiveDayForecastView.render(model.state.forecast.days);
 
   displayMarker(latlng);
 };
 
 const control3HourForecast = function (date) {
+  model.createCurrentObj(date);
+  currentView.render(model.state.forecast.current[0]);
+
   model.loadHourResults(date);
 
-  hourlyView.render(model.state.hourly);
+  hourlyView.render(model.state.forecast.hourly);
 };
 
 const init = function () {

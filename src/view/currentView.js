@@ -12,7 +12,7 @@ class CurrentView extends view {
     }@2x.png" alt="" />
     <div class="desc-curr">
       <h2>${this._data.weather.main}</h2>
-      <h2>${this._data.main.temp}°</h2>
+      <h2>${this._data.main.temp}°C</h2>
     </div>
   </div>
   <div class="forecast-current-right">

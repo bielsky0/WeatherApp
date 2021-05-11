@@ -479,19 +479,17 @@ const controlWeather = async function (city) {
     _viewHourlyViewJsDefault.default.renderSpinner();
     _viewFiveDayForecastViewJsDefault.default.renderSpinner();
     // Get data
-    await _modelJs.loadCurrnetWeather(city);
     await _modelJs.loadForecast(city);
-    // console.log(model.state.forecast.current);
-    // console.log(new Date(1619267357 * 1000).toLocaleString().slice(11, 15));
     // Render data
-    _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current);
-    _viewHourlyViewJsDefault.default.render(_modelJs.getHourResult(1));
+    _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current[0]);
+    _viewHourlyViewJsDefault.default.render(_modelJs.state.forecast.hourly);
     _viewFiveDayForecastViewJsDefault.default.render(_modelJs.state.forecast.days);
-    displayMarker(_modelJs.state.forecast.city.coord);
+    displayMarker(_modelJs.state.city.coord);
+    console.log(city);
   } catch (err) {
     _viewCurrentViewJsDefault.default.renderError(err.message);
     _viewHourlyViewJsDefault.default.renderError(err.message);
-    console.error(err);
+    _viewFiveDayForecastViewJsDefault.default.renderError(err.message);
   }
 };
 const controlMap = async function (latlng) {
@@ -500,15 +498,16 @@ const controlMap = async function (latlng) {
   _viewHourlyViewJsDefault.default.renderSpinner();
   _viewFiveDayForecastViewJsDefault.default.renderSpinner();
   await _modelJs.loadForecastByCoords(lat, lng);
-  await _modelJs.loadCurrentWeatherByCoords(lat, lng);
-  _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current);
-  _viewHourlyViewJsDefault.default.render(_modelJs.getHourResult(1));
+  _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current[0]);
+  _viewHourlyViewJsDefault.default.render(_modelJs.state.forecast.hourly);
   _viewFiveDayForecastViewJsDefault.default.render(_modelJs.state.forecast.days);
   displayMarker(latlng);
 };
 const control3HourForecast = function (date) {
+  _modelJs.createCurrentObj(date);
+  _viewCurrentViewJsDefault.default.render(_modelJs.state.forecast.current[0]);
   _modelJs.loadHourResults(date);
-  _viewHourlyViewJsDefault.default.render(_modelJs.state.hourly);
+  _viewHourlyViewJsDefault.default.render(_modelJs.state.forecast.hourly);
 };
 const init = function () {
   _viewSearchViewJsDefault.default.addHandlerFormSubmit(controlWeather);
@@ -1279,37 +1278,30 @@ _parcelHelpers.export(exports, "loadForecastByCoords", function () {
 _parcelHelpers.export(exports, "loadForecast", function () {
   return loadForecast;
 });
-_parcelHelpers.export(exports, "loadCurrnetWeather", function () {
-  return loadCurrnetWeather;
-});
-_parcelHelpers.export(exports, "loadCurrentWeatherByCoords", function () {
-  return loadCurrentWeatherByCoords;
-});
 _parcelHelpers.export(exports, "loadHourResults", function () {
   return loadHourResults;
 });
-_parcelHelpers.export(exports, "getHourResult", function () {
-  return getHourResult;
+_parcelHelpers.export(exports, "createCurrentObj", function () {
+  return createCurrentObj;
 });
-require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
 const state = {
+  city: {},
+  list: [],
   forecast: {
-    city: {},
     days: [],
+    hourly: [],
     current: {}
-  },
-  hourly: [],
-  day: 1
+  }
 };
 const loadForecastByCoords = async function (lat, lng) {
   try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}lat=${lat}&lon=${lng}&appid=${_configJs.API_KEY}`);
+    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}lat=${lat}&lon=${lng}&units=metric&appid=${_configJs.API_KEY}`);
     const {city} = data;
-    state.forecast.city = city;
-    state.forecast.list = data.list;
+    state.city = city;
     state.forecast.days = [];
+    state.list = data.list;
     for (let i = 0; i < data.list.length; i += 8) {
       state.forecast.days.push({
         main: data.list[i].main,
@@ -1318,6 +1310,8 @@ const loadForecastByCoords = async function (lat, lng) {
         weather: data.list[i].weather[0]
       });
     }
+    loadHourResults(state.forecast.days[0].dt_txt.split(" ")[0]);
+    createCurrentObj(state.forecast.days[0].dt_txt.split(" ")[0]);
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
@@ -1325,12 +1319,11 @@ const loadForecastByCoords = async function (lat, lng) {
 };
 const loadForecast = async function (place) {
   try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${place}&appid=${_configJs.API_KEY}`);
+    const data = await _helpersJs.getJSON(`${_configJs.API_FORECAST}q=${place}&units=metric&appid=${_configJs.API_KEY}`);
     const {city} = data;
-    state.forecast.city = city;
-    state.forecast.list = data.list;
-    // console.log(data);
+    state.city = city;
     state.forecast.days = [];
+    state.list = data.list;
     for (let i = 0; i < data.list.length; i += 8) {
       state.forecast.days.push({
         main: data.list[i].main,
@@ -1339,60 +1332,34 @@ const loadForecast = async function (place) {
         weather: data.list[i].weather[0]
       });
     }
-  } catch (err) {
-    console.error(`${err} !!!`);
-    throw err;
-  }
-};
-const loadCurrnetWeather = async function (place) {
-  try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}q=${place}&appid=${_configJs.API_KEY}`);
-    state.forecast.current = createCurrentObject(data);
-  } catch (err) {
-    console.error(`${err} !!!`);
-    throw err;
-  }
-};
-const loadCurrentWeatherByCoords = async function (lat, lng) {
-  try {
-    const data = await _helpersJs.getJSON(`${_configJs.API_WEATHER}lat=${lat}&lon=${lng}&appid=${_configJs.API_KEY}`);
-    state.forecast.current = createCurrentObject(data);
+    loadHourResults(state.forecast.days[0].dt_txt.split(" ")[0]);
+    createCurrentObj(state.forecast.days[0].dt_txt.split(" ")[0]);
   } catch (err) {
     console.error(`${err} !!!`);
     throw err;
   }
 };
 const loadHourResults = function (date) {
-  state.hourly = state.forecast.list.filter(weather => {
+  state.forecast.hourly = state.list.filter(weather => {
     if (weather.dt_txt.split(" ")[0] === date) {
       return weather;
     }
   });
 };
-const getHourResult = function (day = state.day) {
-  state.day = day;
-  const start = (day - 1) * 8;
-  const end = day * 8;
-  return state.forecast.list.slice(start, end);
-};
-const createCurrentObject = function (data) {
-  return {
-    main: data.main,
-    weather: data.weather[0],
-    coords: data.coord,
-    name: data.name,
-    dt: data.dt
-  };
+const createCurrentObj = function (date) {
+  state.forecast.current = state.forecast.days.filter(day => {
+    if (day.dt_txt.split(" ")[0] === date) {
+      return day;
+    }
+  });
+  state.forecast.current[0].name = state.city.name;
 };
 
-},{"regenerator-runtime":"62Qib","./config.js":"5yJJr","./helpers.js":"1K0Ha","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5yJJr":[function(require,module,exports) {
+},{"./config.js":"5yJJr","./helpers.js":"1K0Ha","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5yJJr":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "API_KEY", function () {
   return API_KEY;
-});
-_parcelHelpers.export(exports, "API_WEATHER", function () {
-  return API_WEATHER;
 });
 _parcelHelpers.export(exports, "API_FORECAST", function () {
   return API_FORECAST;
@@ -1407,7 +1374,6 @@ _parcelHelpers.export(exports, "TIMEOUT_SEC", function () {
   return TIMEOUT_SEC;
 });
 const API_KEY = "f5f020080e0a829ea7030c7f024953d2";
-const API_WEATHER = "http://api.openweathermap.org/data/2.5/weather?";
 const API_FORECAST = "http://api.openweathermap.org/data/2.5/forecast?";
 const ICONS_URL = "http://openweathermap.org/img/wn/";
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -1643,7 +1609,7 @@ class CurrentView extends _viewDefault.default {
     <img src="http://openweathermap.org/img/wn/${this._data.weather.icon}@2x.png" alt="" />
     <div class="desc-curr">
       <h2>${this._data.weather.main}</h2>
-      <h2>${this._data.main.temp}°</h2>
+      <h2>${this._data.main.temp}°C</h2>
     </div>
   </div>
   <div class="forecast-current-right">
@@ -1656,7 +1622,7 @@ class CurrentView extends _viewDefault.default {
 }
 exports.default = new CurrentView();
 
-},{"./view":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../config.js":"5yJJr"}],"3mJKf":[function(require,module,exports) {
+},{"./view":"6dyOt","../config.js":"5yJJr","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"3mJKf":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
@@ -1688,7 +1654,7 @@ class HourlyView extends _viewJsDefault.default {
         <div class="desc-hour">
           <span>${result.weather[0].main}</span>
         </div>
-        <h2>${result.main.temp}°</h2>
+        <h2>${result.main.temp}°C</h2>
       </div>
     </li>
         `;
@@ -1727,20 +1693,19 @@ class fiveDayForecastView extends _viewJsDefault.default {
       if (!el) return;
       Array.from(el.parentElement.children).forEach(e => e.classList.remove("active"));
       el.classList.add("active");
-      console.log(new Date(el.dataset.date).getDay());
       handler(el.dataset.date);
     });
   }
   _generateMarkup() {
-    return this._data.map(result => {
+    return this._data.map((result, i) => {
       return `
-      <li class="forecast-week-item" data-date="${result.dt_txt.split(" ")[0]}">
+      <li class="forecast-week-item ${i === 0 ? "active" : ""}" data-date="${result.dt_txt.split(" ")[0]}">
         <div class="forecast-week-result">
           <img src="http://openweathermap.org/img/wn/${result.weather.icon}.png" alt="" />
           <div class="desc-week">
             <h2>${_configJs.WEEKDAYS[new Date(result.dt * 1000).getDay()]}</h2>
             <span>${result.weather.main}</span>
-            <h2>${result.main.temp}°</h2>
+            <h2>${result.main.temp}°C</h2>
           </div>
         </div>
       </li>
@@ -1750,6 +1715,6 @@ class fiveDayForecastView extends _viewJsDefault.default {
 }
 exports.default = new fiveDayForecastView();
 
-},{"./view.js":"6dyOt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../config.js":"5yJJr"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
+},{"./view.js":"6dyOt","../config.js":"5yJJr","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["1yWRd","BvQis"], "BvQis", "parcelRequired309")
 
 //# sourceMappingURL=index.2aeafb3f.js.map
