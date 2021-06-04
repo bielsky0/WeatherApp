@@ -3,10 +3,10 @@ import view from "./view.js";
 class MapView extends view {
   _parentElement = document.querySelector(".search");
   _titleLayer = new L.TileLayer(
-    "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
       attribution:
-        'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+        'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
     }
   );
   map = new L.map("map", {

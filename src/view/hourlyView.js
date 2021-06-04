@@ -10,7 +10,7 @@ class HourlyView extends view {
       <div class="forecast-hour-result">
         <h2>${result.dt_txt.slice(-8).slice(0, 5)}</h2>
       
-        <img src="http://openweathermap.org/img/wn/${
+        <img src="https://openweathermap.org/img/wn/${
           result.weather[0].icon
         }.png" alt="" />
         

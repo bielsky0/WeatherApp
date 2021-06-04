@@ -28,7 +28,7 @@ class fiveDayForecastView extends view {
           result.dt_txt.split(" ")[0]
         }">
         <div class="forecast-week-result">
-          <img src="http://openweathermap.org/img/wn/${
+          <img src="https://openweathermap.org/img/wn/${
             result.weather.icon
           }.png" alt="" />
           <div class="desc-week">

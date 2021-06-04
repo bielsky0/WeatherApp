@@ -39,7 +39,6 @@ const controlWeather = async function (city) {
     currentView.render(model.state.forecast.current[0]);
     hourlyView.render(model.state.forecast.hourly);
     fiveDayForecastView.render(model.state.forecast.days);
-    console.log(model.state.forecast.hourly);
     displayMarker(model.state.city.coord);
   } catch (err) {
     currentView.renderError(err.message);
