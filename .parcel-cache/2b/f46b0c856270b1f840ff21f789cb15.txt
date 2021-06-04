@@ -55,7 +55,7 @@
 109C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\abortcontroller-polyfill132631543874617525 1
 125C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-discard-overridden\src\__tests__132631543701687787 1
 143C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\regenerate-unicode-properties\Script_Extensions\Tibetan.js121436361000000000 0
-76C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist132652055761942445 1
+76C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist132667727578788496 1
 137C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-unique-selectors\node_modules\chalk\index.js121436361000000000 0
 95C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\randomfill132631543852087797 1
 96C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\regjsparser132631543852307213 1
@@ -83,7 +83,7 @@
 133C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-modules\node_modules\ansi-styles\license131408182550000000 0
 115C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\stable\string\index.js121436361000000000 0
 110C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\whatwg-mimetype\README.md121436361000000000 0
-82C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\.gitignore132651986883262909 0
+82C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\.gitignore132667720239958351 0
 143C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-merge-longhand\node_modules\postcss\lib\postcss.js121436361000000000 0
 134C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\caniuse-lite\data\features\css-read-only-write.js121436361000000000 0
 114C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\stylehacks\node_modules\chalk132631543848766691 1
@@ -137,7 +137,7 @@
 112C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\extend-shallow\node_modules132631543785535489 1
 108C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\postcss\lib\fromJSON.js121436361000000000 0
 113C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\resolve\test\node_path\x\ccc132631543739448933 1
-82C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\index.html132637423300035693 0
+82C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\index.html132667722028164302 0
 122C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\stylehacks\dist\dictionary\postcss.js121436361000000000 0
 89C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\abab132631543874607560 1
 118C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\public-encrypt\test\pass.1024.pub121436361000000000 0
@@ -232,7 +232,7 @@
 119C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\unset-value\node_modules\has-value132631543845295971 1
 98C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\ejs\README.md132186645850000000 0
 116C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\caniuse-lite\data\regions\MG.js121436361000000000 0
-89C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\src\controller.js132652055760899269 0
+89C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\src\controller.js132667727577004731 0
 124C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\core-js\features\symbol\has-instance.js121436361000000000 0
 117C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\postcss-reduce-initial\README.md121436361000000000 0
 100C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\unquote\LICENSE131580428010000000 0
@@ -5841,7 +5841,7 @@
 136C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\domhandler\node_modules\domelementtype\package.json132631543866908152 0
 133C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\simple-swizzle\node_modules\is-arrayish\index.js131738689870000000 0
 132C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\simple-swizzle\node_modules\is-arrayish\LICENSE131738687280000000 0
-94C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js132652055761882623 0
+94C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js132667727578740518 0
 104C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\arr-flatten\LICENSE131437541450000000 0
 97C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\pn\README.md131594427500000000 0
 137C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\simple-swizzle\node_modules\is-arrayish\package.json132631543850950837 0
@@ -20813,8 +20813,8 @@
 98C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\.bin\uuid.cmd132631543887799322 0
 95C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\.bin\which132631543887948889 0
 99C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\node_modules\.bin\which.cmd132631543887948889 0
-98C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js.map132652055761922550 0
-95C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css132652055761882623 0
-99C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css.map132652055761922550 0
-87C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.html132652055761882623 0
+98C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.2aeafb3f.js.map132667727578778534 0
+95C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css132667727578740518 0
+99C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.d10797b7.css.map132667727578778534 0
+87C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\dist\index.html132667727578730545 0
 93C:\Users\48795\OneDrive\Dokumenty\JavaScriptProjects\WeatherForecastApp\.vscode\settings.json132627937164392959 0

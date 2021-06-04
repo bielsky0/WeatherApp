@@ -1,4 +1,3 @@
-import { async } from "regenerator-runtime";
 import * as model from "./model.js";
 import mapView from "./view/mapView.js";
 import searchView from "./view/searchView.js";
@@ -40,9 +39,8 @@ const controlWeather = async function (city) {
     currentView.render(model.state.forecast.current[0]);
     hourlyView.render(model.state.forecast.hourly);
     fiveDayForecastView.render(model.state.forecast.days);
-
+    console.log(model.state.forecast.hourly);
     displayMarker(model.state.city.coord);
-    console.log(city);
   } catch (err) {
     currentView.renderError(err.message);
     hourlyView.renderError(err.message);

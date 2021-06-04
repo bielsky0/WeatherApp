@@ -9,9 +9,11 @@ class HourlyView extends view {
     <li class="forecast-hour-item">
       <div class="forecast-hour-result">
         <h2>${result.dt_txt.slice(-8).slice(0, 5)}</h2>
-        <div class="desc-hour">
-          <span>${result.weather[0].main}</span>
-        </div>
+      
+        <img src="http://openweathermap.org/img/wn/${
+          result.weather[0].icon
+        }.png" alt="" />
+        
         <h2>${result.main.temp}°C</h2>
       </div>
     </li>

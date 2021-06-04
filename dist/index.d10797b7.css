@@ -37,7 +37,7 @@ header {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 .search-box input::placeholder {
-  font-size: 20px;
+  /* font-size: 20px; */
   color: #f1f1f1;
   opacity: 1;
   letter-spacing: 1px;
@@ -113,9 +113,7 @@ section {
   cursor: pointer;
   display: flex;
   padding: 5px;
-}
-.forecast-hour-result span {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 img {
@@ -157,6 +155,188 @@ img {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 1424px) {
+  .forecast-current-left {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  .forecast-current-left img {
+    width: 45%;
+  }
+  .forecast-current-right {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .forecast-hour-result img {
+    width: 50%;
+  }
+
+  .forecast-hour-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 9px;
+  }
+  .search-box input {
+    padding: 10px 50px;
+    font-size: 10px;
+  }
+
+  .search-box button {
+    padding: 10px 30px;
+    font-size: 15px;
+  }
+  .forecast-week-result {
+    display: flex;
+    padding: 5px;
+    font-size: 10px;
+  }
+
+  .forecast-week-result img {
+    width: 40%;
+  }
+  .desc-week h2 {
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .container {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: none;
+    gap: 30px;
+    height: 100vh;
+    padding: 40px 100px;
+  }
+
+  .forecast-current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .forecast-current-left {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  .forecast-current-left img {
+    width: 45%;
+  }
+  .forecast-current-right {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .forecast-hour-result img {
+    width: 50%;
+  }
+
+  .forecast-hour-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 7px;
+  }
+  .search-box input {
+    padding: 10px 30px;
+    font-size: 10px;
+  }
+
+  .search-box button {
+    padding: 10px 30px;
+    font-size: 10px;
+  }
+  .forecast-week {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .forecast-week-result {
+    display: flex;
+    padding: 5px;
+    font-size: 7px;
+  }
+
+  .forecast-week-result img {
+    width: 30%;
+  }
+  .desc-week h2 {
+    font-size: 7px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .container {
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: none;
+    gap: 10px;
+    height: 100vh;
+    padding: 20px;
+  }
+
+  .forecast-current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .forecast-current-left {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+  .forecast-current-left img {
+    width: 40%;
+  }
+  .forecast-current-right {
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .forecast-hour {
+    max-width: 479px;
+  }
+  .forecast-hour-result img {
+    width: 50%;
+  }
+
+  .forecast-hour-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 5px;
+  }
+  .search-box input {
+    padding: 7px 15px;
+    font-size: 10px;
+  }
+
+  .search-box button {
+    padding: 5px 5px;
+    font-size: 10px;
+  }
+  .forecast-week {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .forecast-week-result {
+    display: flex;
+    padding: 5px;
+    font-size: 7px;
+  }
+
+  .forecast-week-result img {
+    width: 30%;
+  }
+  .desc-week h2 {
+    font-size: 7px;
   }
 }
 
