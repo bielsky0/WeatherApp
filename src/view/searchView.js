@@ -7,14 +7,9 @@ class SearchView extends view {
   _generateMarkup() {}
 
   addHandlerFormSubmit(handler) {
+    const inputEl = this._input;
     this._form.addEventListener("submit", function (e) {
       e.preventDefault();
-
-      const inputEl = Array.from(e.target.childNodes).find((e) => {
-        if (e.classList) {
-          return e.classList.contains("search-input");
-        }
-      });
 
       handler(inputEl.value);
     });

@@ -27,15 +27,13 @@ const displayMarker = function (latlng) {
 
 const controlWeather = async function (city) {
   try {
-    // Render spinners
+    console.log(city);
     currentView.renderSpinner();
     hourlyView.renderSpinner();
     fiveDayForecastView.renderSpinner();
 
-    // Get data
     await model.loadForecast(city);
 
-    // Render data
     currentView.render(model.state.forecast.current[0]);
     hourlyView.render(model.state.forecast.hourly);
     fiveDayForecastView.render(model.state.forecast.days);
